@@ -4,6 +4,7 @@ class Game {
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
+    this.timer = container.querySelector('.timer');
 
     this.reset();
 
@@ -25,6 +26,25 @@ class Game {
       При неправильном вводе символа - this.fail();
       DOM-элемент текущего символа находится в свойстве this.currentSymbol.
      */
+    this.counter = this.wordElement.childElementCount + 1;
+    let intervalId = setInterval(() => {
+      if (this.counter > 0) {
+        this.counter--;
+        this.timer.textContent = this.counter;
+      } else {
+        this.fail();
+      }
+  }, 1000)
+    
+
+    document.addEventListener('keydown', function(event) {
+      const userInput = event.key.toLowerCase()
+      if (this.currentSymbol.textContent.toLowerCase() === userInput) {
+        this.success()
+      } else {
+        this.fail();
+      }
+    }.bind(this));
   }
 
   success() {
@@ -50,6 +70,7 @@ class Game {
       this.reset();
     }
     this.setNewWord();
+    this.counter = this.wordElement.childElementCount + 1;
   }
 
   setNewWord() {
