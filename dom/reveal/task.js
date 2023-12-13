@@ -1,17 +1,18 @@
-
 window.addEventListener('scroll', function() {
-    const el = document.querySelector('.reveal')
-    const {top, bottom} = el.getBoundingClientRect();
+    const elements = document.querySelectorAll('.reveal');
 
-    if (bottom < 0 || top > window.innerHeight) {
-        if (el.classList.contains('reveal_active')) {
-            el.classList.remove('reveal_active');
+    elements.forEach(function(el) {
+        const {top, bottom} = el.getBoundingClientRect();
+
+        if (bottom < 0 || top > window.innerHeight) {
+            if (el.classList.contains('reveal_active')) {
+                el.classList.remove('reveal_active');
+            }
+        } else {
+            if (!el.classList.contains('reveal_active')) {
+                el.classList.add('reveal_active');
+            }
         }
-        return false;
-    } else {
-        if (!el.classList.contains('reveal_active')) {
-            el.classList.add('reveal_active');
-        }
-        return true;
-    }
+    });
 });
+
