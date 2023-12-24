@@ -1,74 +1,43 @@
 const hasTooltip = document.querySelectorAll('.has-tooltip');
 
+Array.from(hasTooltip).forEach(function(el) {
+    const divElement = document.createElement('div');
+
+    divElement.classList.add('tooltip');
+    el.appendChild(divElement);
+})
 
 hasTooltip.forEach(element => {
     element.addEventListener('mouseenter', function(event) {
+
         event.preventDefault();
-        const tooltip = document.querySelector('.tooltip');
+        
+        const child = element.querySelector('.tooltip');
+        let  state = false;
 
         if (element.title) {
-            tooltip.textContent = element.title;
-            element.title = ''
+
+            child.textContent = element.title;
         }
-        
-
-        console.log(element.querySelector('.tooltip'))
-
-        /*if (element.title) {
-            const newTag = document.createElement('div');
-        
-            document.body.appendChild(newTag);
-            newTag.className = 'tooltip';
-            newTag.textContent = element.title;
-
-            element.title = ''
-        }*/
 
         element.onclick = () => {
             const child = element.querySelector('.tooltip');
-            if (child.classList.contains('tooltip_active')) {
+
+            if (state) {
                 child.classList.remove('tooltip_active')
+                state = false;
+                
             } else {
                 child.classList.add('tooltip_active')
+                child.style = `left: ${element.offsetLeft}px;`
+                element.title = child.textContent
+                state = true;
             }
-            
         }
-
-    element.addEventListener('click', function(event) {
-        event.preventDefault();
-
-        /*element.style = 'pointer-events:auto;'*/
-        
-    })
-        
-
-        /*title = element.title;
-        
-        
-        element.href = ''
-        
-
-        if (element.title.length > 0) {
-            const ppp = element.title
-            element.title = ''
-        } else {
-            element.title = ppp
-        }
-        element.onclick = () => {
+        element.addEventListener('click', function(event) {
             event.preventDefault();
-            
-            console.log('lfsdlsfdlkdsfdlk')
-        }*/
-        
-
-        
-        
+        })
     })
-    /*element.addEventListener('click', function(e) {
-        e.preventDefault();
-        element.title = ppp
-        element.classList.add('tooltip_active')
-    })*/
-
 });
+
 

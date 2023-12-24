@@ -13,6 +13,7 @@
 
 .tooltip {
   position: fixed;
+  
   display: none;
   background: black;
   padding: 5px;
