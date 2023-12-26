@@ -7,36 +7,36 @@ Array.from(hasTooltip).forEach(function(el) {
     el.appendChild(divElement);
 })
 
+const tooltips = document.querySelectorAll('.tooltip');
+
 hasTooltip.forEach(element => {
-    element.addEventListener('mouseenter', function(event) {
+    element.addEventListener('click', function(event) {
 
         event.preventDefault();
         
         const child = element.querySelector('.tooltip');
-        let  state = false;
-
+        function checkAndRemove() {
+            for (let index = 0; index < tooltips.length; index++) {
+                const tooltip = tooltips[index];
+                if (tooltip.classList.contains('tooltip_active')) {
+                    tooltip.classList.remove('tooltip_active');
+                }  
+            }
+        }
+        
         if (element.title) {
-
             child.textContent = element.title;
         }
 
-        element.onclick = () => {
-            const child = element.querySelector('.tooltip');
-
-            if (state) {
-                child.classList.remove('tooltip_active')
-                state = false;
-                
-            } else {
-                child.classList.add('tooltip_active')
-                child.style = `left: ${element.offsetLeft}px;`
-                element.title = child.textContent
-                state = true;
-            }
+        if (child.classList.contains('tooltip_active')) {
+            checkAndRemove()
+             
+        } else {
+            checkAndRemove()
+            child.classList.add('tooltip_active');
+            child.style = `left: ${element.offsetLeft}px;`
+            element.title = child.textContent; 
         }
-        element.addEventListener('click', function(event) {
-            event.preventDefault();
-        })
     })
 });
 
