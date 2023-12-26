@@ -4,7 +4,9 @@ const tasksList = document.querySelector('#tasks__list');
 const newDiw = document.createElement('div');
 const input = form.querySelector('#task__input')
 
-tasksAdd.setAttribute('type', 'button');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+})
 
 tasksAdd.onclick = () => {
     const newDiw = document.createElement('div');
@@ -16,11 +18,10 @@ tasksAdd.onclick = () => {
         const taskRemove = document.querySelectorAll('.task__remove');
 
         taskRemove.forEach(link => {
-            link.addEventListener('click', () => {
-                parent_element = link.closest('.task')
-                parent_element.remove();
-            });
-          });
-        
+            link.onclick = () => {
+                const parentElement = link.closest('.task')
+                parentElement.remove();
+            }
+        })  
     }
 }
