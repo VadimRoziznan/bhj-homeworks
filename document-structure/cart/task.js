@@ -30,8 +30,19 @@ products.forEach(product => {
 
     productAdd.onclick = () => {
         const newDiw = document.createElement('div');
+        console.log(cart)
+        const productInCard = cart.find(element => {
+            element.getAttribute(dataId);
+        });
+        if(productInCard) {
+            // увеличивать количество у productInCard
+            console.log('yes')
+        } else {
+            // добавлять новый элемент продукта
+            console.log('now')
+        }
 
-        if (!cartListID.includes(dataId)) {
+        /*if (!cartListID.includes(dataId)) {
             newDiw.innerHTML = `<div class="cart__product" data-id="${dataId}"><img class="cart__product-image" src="${src}"><div class="cart__product-count">${cartCount.textContent}</div></div>`
             cart.appendChild(newDiw);
             cartListID.push(dataId);
@@ -46,6 +57,7 @@ products.forEach(product => {
                     productCount.textContent = parseInt(cartCount.textContent) + parseInt(productCount.textContent);
                 }
             })
-        }  
+
+        }*/  
     }
 })
