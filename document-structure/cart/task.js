@@ -1,7 +1,5 @@
 const productQuantityControls = document.querySelectorAll('.product__quantity-controls');
 const products = document.querySelectorAll('.product');
-const cart = document.querySelector('.cart__products');
-const cartListID = new Array();
 
 productQuantityControls.forEach(productQuantityControl => {
     const controlDec = productQuantityControl.querySelector('.product__quantity-control_dec');
@@ -9,14 +7,12 @@ productQuantityControls.forEach(productQuantityControl => {
     const productValue = productQuantityControl.querySelector('.product__quantity-value')
 
     controlDec.onclick = () => {
-
         if (productValue.textContent > 1) {
             productValue.textContent --;
         }
     }
 
     controlInc.onclick = () => {
-        
         productValue.textContent ++;
     }
 })
@@ -29,35 +25,17 @@ products.forEach(product => {
     const cartCount = product.querySelector('.product__quantity-value');
 
     productAdd.onclick = () => {
+        const productsInCard = Array.from(document.querySelectorAll('.cart__product'))
+        const product = productsInCard.find(element => element.getAttribute('data-id') == dataId)
         const newDiw = document.createElement('div');
-        console.log(cart)
-        const productInCard = cart.find(element => {
-            element.getAttribute(dataId);
-        });
-        if(productInCard) {
-            // увеличивать количество у productInCard
-            console.log('yes')
-        } else {
-            // добавлять новый элемент продукта
-            console.log('now')
-        }
+        const cart = document.querySelector('.cart__products');
 
-        /*if (!cartListID.includes(dataId)) {
+        if(!product) {
             newDiw.innerHTML = `<div class="cart__product" data-id="${dataId}"><img class="cart__product-image" src="${src}"><div class="cart__product-count">${cartCount.textContent}</div></div>`
             cart.appendChild(newDiw);
-            cartListID.push(dataId);
         } else {
-            const productsInCart = cart.querySelectorAll('.cart__product');
-
-            productsInCart.forEach(productInCart => {
-                const idProductInCart = productInCart.getAttribute('data-id')
-                const productCount = productInCart.querySelector('.cart__product-count');
-
-                if (dataId === idProductInCart) {
-                    productCount.textContent = parseInt(cartCount.textContent) + parseInt(productCount.textContent);
-                }
-            })
-
-        }*/  
+            const productCount = product.querySelector('.cart__product-count');
+            productCount.textContent = parseInt(productCount.textContent) + parseInt(cartCount.textContent)
+        }
     }
 })
