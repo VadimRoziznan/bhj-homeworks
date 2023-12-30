@@ -4,7 +4,7 @@ Array.from(hasTooltip).forEach(function(el) {
     const divElement = document.createElement('div');
 
     divElement.classList.add('tooltip');
-    el.appendChild(divElement);
+    el.insertAdjacentElement("afterEnd", divElement);
 })
 
 const tooltips = document.querySelectorAll('.tooltip');
@@ -14,7 +14,7 @@ hasTooltip.forEach(element => {
 
         event.preventDefault();
         
-        const child = element.querySelector('.tooltip');
+        const child = element.nextElementSibling;
         function checkAndRemove() {
             for (let index = 0; index < tooltips.length; index++) {
                 const tooltip = tooltips[index];
