@@ -1,14 +1,11 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const editor = document.getElementById('editor');
+const editor = document.getElementById('editor');
 
-    editor.textContent = restoreObject('editor')
-})
+editor.textContent = restoreObject('editor')
 
-editor.addEventListener('change', (event) => {
+editor.addEventListener('input', (event) => {
     const updateValue = event.target.value;
-    const savadValue = restoreObject('editor')
+    const savedValue = restoreObject('editor')
     saveObject('editor', updateValue)
-    console.log('saveData = ', savadValue)
 })
 
 function saveObject(key, object) {
@@ -16,9 +13,5 @@ function saveObject(key, object) {
 }
 
 function restoreObject(key) {
-    try {
-        return localStorage.getItem(key);
-    } catch {
-        return null;
-    }
+    return localStorage.getItem(key);
 }
